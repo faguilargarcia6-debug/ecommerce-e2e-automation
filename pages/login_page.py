@@ -1,9 +1,6 @@
-from selenium.webdriver.support.expected_conditions import element_to_be_clickable
-
 from locators.locator_login import Loginlocators
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.common.by import By
 from config import BASE_URL
 
 class LoginPage:
