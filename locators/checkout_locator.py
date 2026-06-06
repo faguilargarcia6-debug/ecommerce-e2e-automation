@@ -1,0 +1,22 @@
+from selenium.webdriver.common.by import By
+
+class CheckoutLocator:
+    CHECKOUT_BUTTON = (By.ID, "checkout")
+    CONTACT_GUEST = (By.ID, "contact")
+    INVALID_CARD = (By.ID, "error-for-number")
+    LAST_NAME = (By.NAME, "lastName")
+    ADDRESS = (By.NAME, "address1")
+    POSTCODE = (By.NAME, "postalCode")
+    CITY = (By.NAME, "city")
+    STATE = (By.NAME, "zone")
+    RFC = (By.NAME, "RFC")
+    CARD_NUMBER = (By.ID, "number")
+    EXPIRY_DATE = (By.CSS_SELECTOR, "iframe[id*='card-fields-expiry']")
+    SECURITY_CODE = (By.ID, "verification_value")
+    CARD_NAME = (By.ID, "name")
+    PAY_BUTTON = (By.ID, "checkout-pay-button")
+    EMAIL = (By.ID, "email")
+    LAST_NAME_ERROR = (By.ID, "error-for-TextFieldP0-40")
+    ADDRESS_ERROR = (By.ID, "error-for-TextFieldP0-45")
+    POSTCODE_ERROR = (By.ID, "error-for-TextFieldP0-49")
+    CITY_ERROR = (By.ID, "error-for-TextFieldP0-50")

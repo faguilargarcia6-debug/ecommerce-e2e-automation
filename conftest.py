@@ -5,7 +5,7 @@ from pages.cart_pages import CartPage
 from pages.login_page import  LoginPage
 from config import BASE_URL
 from pages.products_pages import ProductsPage
-
+from pages.checkout_pages import CheckoutPage
 
 @pytest.fixture
 def driver():
@@ -25,3 +25,7 @@ def products_pages(driver):
 @pytest.fixture
 def cart_pages(driver):
     return CartPage(driver)
+
+@pytest.fixture
+def checkout_page(driver):
+    return CheckoutPage(driver)

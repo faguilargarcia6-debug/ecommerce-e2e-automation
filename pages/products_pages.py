@@ -1,4 +1,3 @@
-from selenium.webdriver.support.expected_conditions import element_to_be_clickable
 from selenium.webdriver.support.ui import Select
 from locators.products_locator import Productslocators
 from selenium.webdriver.support import expected_conditions as EC
@@ -12,7 +11,7 @@ class ProductsPage:
         self.wait = WebDriverWait(driver, 10)
 
     def open_product_page(self, product_slug):
-        self.driver.get(BASE_URL + f"/collections/frontpage/products/{product_slug}")
+        self.driver.get(BASE_URL + f"collections/frontpage/products/{product_slug}")
 
     def add_product_to_cart(self, product_name):
         locator = (

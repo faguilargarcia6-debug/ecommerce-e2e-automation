@@ -1,4 +1,4 @@
-from locators.locator_login import Loginlocators
+from locators.login_locator import Loginlocators
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from config import BASE_URL
@@ -27,12 +27,19 @@ class LoginPage:
         element.send_keys(password)
 
     def click_login(self):
-        self.wait.until(EC.element_to_be_clickable(Loginlocators.LOGIN_BUTTON_LOCATOR)).click()
+        button = self.wait.until(
+            EC.element_to_be_clickable(
+                Loginlocators.LOGIN_BUTTON_LOCATOR
+            )
+        )
+        button.click()
+
 
     def login(self, email, password):
         self.enter_email_address(email)
         self.enter_password(password)
         self.click_login()
+
 
     def get_error_message(self):
         return self.wait.until(
@@ -43,4 +50,5 @@ class LoginPage:
         return "captcha" in self.driver.page_source.lower()
 
     def is_logged_in(self):
-        return "/account" in self.driver.current_url
+        return "/account/login" not in self.driver.current_url
+

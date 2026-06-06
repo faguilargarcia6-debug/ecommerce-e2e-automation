@@ -1,63 +1,104 @@
 # 🧪 Ecommerce E2E Automation Framework
 
-Framework de automatización de pruebas End-to-End (E2E) enfocado en validar flujos críticos de plataformas ecommerce, desarrollado con **Python, Selenium y Pytest**, siguiendo el patrón **Page Object Model (POM)**.
+An end-to-end test automation framework built to validate critical ecommerce workflows. I developed it using Python, Selenium WebDriver, and Pytest, following the Page Object Model (POM) pattern to keep the codebase clean, maintainable, and easy to scale.
 
 ---
 
-## 📌 Descripción
+## 📌 Overview
+I built this project to automate smoke and functional testing across the most important ecommerce features. The framework covers the full user journey — from browsing products to completing a purchase — including:
 
-En este proyecto desarrollé un framework de automatización orientado a pruebas **smoke** sobre funcionalidades esenciales de un ecommerce, tales como:
+- User authentication and login validation
+- Login behavior with both valid and invalid credentials
+- Product browsing and navigation
+- Selecting product variants (size and color)
+- Adding products to the cart
+- Cart persistence and state validation
+- Removing products from the cart
+- Purchase total calculation
+- Checkout form validation
+- Payment flow with valid and invalid card data
+- Defect identification, documentation, and tracking
 
-* Login de usuario
-* Validación de acceso
-* Manejo de credenciales válidas e inválidas
-
-El diseño del framework permite su reutilización en diferentes plataformas ecommerce, desacoplando datos, lógica y localizadores.
+The structure separates test data, page logic, and locators — making it straightforward to maintain and adapt to different ecommerce platforms.
 
 ---
+## 🎯 Project Objectives
+A few things I wanted to get right with this project:
 
-## 🧱 Arquitectura del Proyecto
-
-En el proyecto seguí una estructura modular basada en buenas prácticas de automatización:
-
+- Build a UI automation framework from scratch, following industry standards
+- Apply a scalable Page Object Model architecture
+- Cover both positive and negative test scenarios
+- Sharpen my debugging and failure analysis skills
+- Practice defect reporting and test documentation
+- Get hands-on experience automating real ecommerce workflows
+---
+## 🧱 Architecture
+The framework follows a modular structure that separates responsibilities clearly:
 ```
 project/
 │
-├── data/              # Page Objects (lógica de interacción)
-│   └── data_checkout.py
+├── data/                         # Test data management
+│   ├── checkout_data.py
+│   ├── data_checkout.py
 │   └── data_login.py
 │
-├── locators/           # Selectores de elementos
-│   └── locator_checkout.py
-│   └── locator_login.py
+├── locators/                     # Centralized UI locators
+│   ├── cart_locators.py
+│   ├── checkout_locators.py
+│   ├── login_locators.py
+│   └── products_locators.py
 │
-├── pages/               # Datos de prueba (inputs)
-│   └── cart_pages.py
-│   └── checkout_pages.py
-│   └── login_pages.py
+├── pages/                        # Page Object Model implementation
+│   ├── cart_pages.py
+│   ├── checkout_pages.py
+│   ├── login_pages.py
+│   └── products_pages.py
 │
-├── tests/              # Casos de prueba
-│   └── test.py
+├── test/                         # Automated test suites
+│   ├── cart_test.py
+│   ├── checkout_test.py
+│   ├── login_test.py
+│   └── product_test.py
 │
-├── config.py           # Configuración (URL base, etc.)
-├── conftest.py         # Fixtures de Pytest (driver setup)
-└── README.md
+├── config.py                     # Global configuration
+├── conftest.py                   # Shared fixtures
+├── pytest.ini                    # Custom pytest markers
+├── README.md                     # Project documentation
+└── .gitignore                    # Ignored files and folders
 ```
+**Some design decisions worth noting:**
 
+- Page Object Model keeps UI logic out of the tests themselves
+- Centralized locators make selector updates painless
+- Explicit waits reduce flakiness without hardcoded sleeps
+- Pytest fixtures handle driver setup and teardown automatically
+- Parameterized tests allow broader coverage with less repetition
 ---
 
-## ⚙️ Tecnologías utilizadas
+## ⚙️ Technologies Used
 
 * **Python 3**
 * **Selenium WebDriver**
 * **Pytest**
 * **Page Object Model (POM)**
-
+* **Git**
+* **Github**
+* **Pycharm**
+---
+## ️⚙️ Testing Techniques
+- Data-Driven Testing
+- Parameterized Tests
+- Explicit Waits
+- Page Object Model
+- Positive and Negative Testing
+- Form Validation Testing
+- Guest Checkout Testing
+- Defect Tracking and XFAIL Management
 ---
 
-## 🚀 Instalación y ejecución
+## 🚀 Installation & execution
 
-### 1. Clonar el repositorio
+### 1. Clone repository.
 
 ```bash
 git clone https://github.com/tu-usuario/ecommerce-e2e-automation.git
@@ -66,7 +107,7 @@ cd ecommerce-e2e-automation
 
 ---
 
-### 2. Crear entorno virtual
+### 2. New virtual environment
 
 ```bash
 python -m venv .venv
@@ -76,7 +117,7 @@ source .venv/bin/activate  # Linux / Mac
 
 ---
 
-### 3. Instalar dependencias
+### 3. Install requirements
 
 ```bash
 pip install -r requirements.txt
@@ -84,51 +125,98 @@ pip install -r requirements.txt
 
 ---
 
-### 4. Ejecutar pruebas
+### 4. Execute tests
 
 ```bash
 pytest -v
 ```
 
 ---
+## 🧪 Testing Strategy
 
-## 🧪 Estrategia de testing
+### ✔ Positive Tests
 
-### ✔ Pruebas positivas
+- Valid login
+- Add product to cart
+- Guest checkout flow
+- Shipping information form completion
+- Payment form completion
+- Cart update verification
 
-* Validación de login exitoso
-* Verificación de redirección a estado autenticado
+### ✔ Negative Tests
 
-### ✔ Pruebas negativas
+- Invalid credentials
+- Empty login fields
+- Invalid card number
+- Required shipping fields validation:
+  - Last Name
+  - Address
+  - Postal Code
+  - City
+- Checkout blocking when mandatory information is missing
+---
+## Known Issues
 
-* Credenciales inválidas
-* Campos vacíos
+### BUG-001: Cart drawer content does not refresh after adding products
 
-⚠️ Nota:
-Algunas pruebas negativas pueden verse afectadas por mecanismos anti-bot (CAPTCHA).
+Description:
+The cart drawer UI does not update automatically after a product is added to the cart.
+
+Impact:
+Users cannot verify that the selected product was successfully added to the cart without refreshing the page or navigating to the cart page.
+
 ---
 
-## 🧠 Buenas prácticas implementadas
+### BUG-002: Checkout cannot be completed with valid payment data
 
-* Separación de responsabilidades (POM)
-* Uso de fixtures con Pytest
-* Parametrización de datos de prueba
-* Esperas explícitas (WebDriverWait)
-* Diseño escalable y mantenible
+Description:
+The application rejects payment completion even when valid card information is provided.
+
+Impact:
+The complete Happy Path checkout flow cannot be validated automatically.
+
+Status:
+Documented and excluded from pass/fail evaluation.
+---
+## Known Limitations
+
+### KL-001: Shopify CAPTCHA blocks automated login
+
+Description:
+Shopify anti-bot protection may prevent automated authentication flows.
+
+Impact:
+Automated login tests may fail even when valid credentials are provided.
+
+Workaround:
+Guest checkout scenarios were used for checkout validation.
+---
+## 🧠 Best Practices Implemented
+
+* Page Object Model (POM) architecture
+* Separation of concerns between pages, locators, and test data
+* Reusable test data management
+* Pytest fixtures for test setup and teardown
+* Parameterized test execution
+* Explicit waits using WebDriverWait
+* Dynamic locators and resilient element identification
+* Dynamic URL handling
+* Pytest markers (`skip`, `xfail`, `parametrize`)
+* Iframe handling for payment fields
+* Defect identification and documentation
+* Differentiation between application defects and environment limitations
+* Structured debugging and root cause analysis
+* Maintainable and scalable test architecture
 
 ---
 
-## 📈 Próximas mejoras
+## 📈 Future Improvements
 
-* Automatización de flujo de carrito
-* Automatización de checkout
-* Integración con CI/CD (GitHub Actions)
-* Reportes de ejecución (Allure / HTML reports)
-
-
----
-
-## 📄 Licencia
-
-Este proyecto es de uso educativo y demostrativo.
-
+* CI/CD integration with GitHub Actions
+* BDD implementation using Behave
+* Allure reporting integration
+* Screenshot capture on test failures
+* Test execution using Docker containers
+* Improved test data management
+* Enhanced logging and debugging reports
+* Failure evidence collection (screenshots and logs)

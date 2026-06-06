@@ -1,5 +1,5 @@
 import pytest
-from selenium.webdriver.support.wait import time
+
 @pytest.mark.cart
 class TestCart:
 
@@ -12,7 +12,7 @@ class TestCart:
         assert cart_pages.is_cart_dropdown_visible()
 
     @pytest.mark.xfail(
-        reason="BUG-1: Cart drawer content does not refresh after adding products."
+        reason="BUG-001: Cart drawer content does not refresh after adding products."
     )
     def test_cart_button_displays_added_products(self, cart_pages, products_pages):
 
@@ -25,8 +25,12 @@ class TestCart:
         assert cart_pages.cart_content_is_displayed(), (
             "Cart drawer did not refresh after adding a product."
         )
-    def test_cart_keep_product_after_log_in(self, cart_pages, products_pages, login_page):
 
+    @pytest.mark.xfail(
+        reason="KL-001:Login validation blocked by Shopify CAPTCHA",
+        strict=False
+    )
+    def test_cart_keep_product_after_log_in(self, cart_pages, products_pages, login_page):
         products_pages.open_product_page("noir-jacket")
 
         assert products_pages.login_button_visible()
@@ -38,6 +42,8 @@ class TestCart:
         products_pages.click_login_button()
 
         login_page.login("Iguanabel@gmail.com", "Iguanabel")
+
+        assert login_page.is_logged_in()
 
         cart_pages.open_cart()
 

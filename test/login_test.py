@@ -1,6 +1,10 @@
 import pytest
 from data.data_login import LOGIN_CREDENTIALS
-
+@pytest.mark.login
+@pytest.mark.xfail(
+    reason= "KL-001:Login validation blocked by Shopify CAPTCHA",
+    strict=False
+)
 @pytest.mark.parametrize("data", LOGIN_CREDENTIALS, ids=[d["name"] for d in LOGIN_CREDENTIALS])
 def test_login(data, login_page):
     login_page.open()

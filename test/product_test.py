@@ -35,8 +35,8 @@ class TestProducts:
 
         products_pages.open_product_page("noir-jacket")
 
-        products_pages.select_size("M")
-        products_pages.select_color("Red")
+        products_pages.select_size("S")
+        products_pages.select_color("Blue")
 
         products_pages.add_product_to_cart("Noir jacket")
 
@@ -46,6 +46,6 @@ class TestProducts:
 
         assert cart_pages.product_variant_is_displayed(
             "Noir jacket",
-            size= "M",
-            color= "Red",
+            size= "S",
+            color= "Blue",
         )
