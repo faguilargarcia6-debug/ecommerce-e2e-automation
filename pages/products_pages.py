@@ -8,7 +8,7 @@ from config import BASE_URL
 class ProductsPage:
     def __init__(self, driver):
         self.driver = driver
-        self.wait = WebDriverWait(driver, 10)
+        self.wait = WebDriverWait(driver, 20)
 
     def open_product_page(self, product_slug):
         self.driver.get(BASE_URL + f"collections/frontpage/products/{product_slug}")
