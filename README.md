@@ -191,6 +191,16 @@ Automated login tests may fail even when valid credentials are provided.
 Workaround:
 Guest checkout scenarios were used for checkout validation.
 ---
+## CI/CD
+
+This project automatically executes the test suite using GitHub Actions on:
+
+- Push to main
+- Pull Requests targeting main
+
+The workflow installs dependencies, executes the Pytest suite, and publishes execution reports.
+
+---
 ## 🧠 Best Practices Implemented
 
 * Page Object Model (POM) architecture
@@ -207,12 +217,11 @@ Guest checkout scenarios were used for checkout validation.
 * Differentiation between application defects and environment limitations
 * Structured debugging and root cause analysis
 * Maintainable and scalable test architecture
-
+* CI/CD Pipelines
 ---
 
 ## 📈 Future Improvements
 
-* CI/CD integration with GitHub Actions
 * BDD implementation using Behave
 * Allure reporting integration
 * Screenshot capture on test failures
