@@ -12,7 +12,7 @@ from pages.checkout_pages import CheckoutPage
 def driver():
     options= Options()
     if os.getenv("CI"):
-        options.add_argument("--headless")
+        options.add_argument("--headless=new")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
 

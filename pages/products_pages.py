@@ -30,10 +30,21 @@ class ProductsPage:
         )
 
         self.wait.until(
-            lambda driver: int(
+            lambda driver:
+            driver.find_element(*locator)
+            .text.replace("(", "")
+            .replace(")", "")
+            .strip()
+            .isdigit()
+        )
+
+        self.wait.until(
+            lambda driver:
+            int(
                 driver.find_element(*locator)
                 .text.replace("(", "")
                 .replace(")", "")
+                .strip()
             ) > 0
         )
 
